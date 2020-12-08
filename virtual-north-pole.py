@@ -9,12 +9,41 @@ def Menu(options, acceptableMenuChoices):
    return theChoice
 
 def MainMenuScreen():
-   menu = Menu(["1 - Have you been good or bad haha?", "q - quit"], ["1", "q"])
-   if menu == "1":
+   menu = Menu(["b - Have you been good or bad haha?", "s - shop", "r - random christmas picture", "c - credits", "l - christmas song lyrics", "m - meet santa", "q - quit"], ["b", "s", "r", "c", "l", "m","q"])
+   if menu == "b":
       GoodOrBadScreen()
    if menu == "q":
       GoodByeScreen()
-      
+   if menu == "s":
+      ShopScreen()
+   if menu == "r":
+      RandomPictureScreen()
+   if menu == "c":
+      CreditsScreen()
+   if menu == "l":
+      LyricsScreen()
+   if menu == "m":
+      MeetSantaScreen()
+
+def LoadingScreen():
+   print("Loading...")
+   time.sleep(1)
+
+def ShopScreen():
+   print("ShopScreen")
+
+def RandomPictureScreen():
+   print("RandomPictureScreen")
+
+def CreditsScreen():
+   print("CreditsScreen")
+
+def LyricsScreen():
+   print("LyricsScreen")
+
+def MeetSantaScreen():
+   print("MeetSantaScreen")
+
 def WelcomeScreen():
    global Name
    print("Welcome to Santa")
@@ -72,5 +101,6 @@ def GoodByeScreen():
    ''')
    print("okey bye")
 
+LoadingScreen()
 WelcomeScreen()
 MainMenuScreen()
