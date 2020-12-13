@@ -1,18 +1,40 @@
 import time
 import os
+import sys
+import random
+
+Name = ""
+Credits = 0
 
 def Menu(options, acceptableMenuChoices):
    theChoice = ""
    while(theChoice not in acceptableMenuChoices):
       for option in options:
          print(option)
+         print("")
       theChoice = input("Choose ur thing idk: ").lower()
    return theChoice
 
 def MainMenuScreen():
    os.system("cls")
    print("")
-   menu = Menu(["b - Have you been good or bad haha?", "s - shop", "r - random christmas picture", "c - credits", "l - christmas song lyrics", "m - meet santa", "q - quit"], ["b", "s", "r", "c", "l", "m","q"])
+   menu = Menu([
+         "b - Have you been good or bad haha?", 
+         "s - shop", 
+         "r - random christmas picture", 
+         "c - credits", 
+         "l - christmas song lyrics", 
+         "m - meet santa", 
+         "q - quit"
+      ], [
+         "b", 
+         "s", 
+         "r", 
+         "c", 
+         "l", 
+         "m",
+         "q"
+      ])
    if menu == "b":
       GoodOrBadScreen()
    if menu == "q":
@@ -33,9 +55,40 @@ def LoadingScreen():
    print("Loading...")
    time.sleep(1)
 
+def GetNumberFromUser(message, errormessage):
+   ValidInputGiven = False
+   while ValidInputGiven == False:
+      stringInput = input(message)
+      if stringInput.isdigit() == False:
+         print(errormessage)
+      else:
+         ValidInputGiven = True
+   integer = int(stringInput)
+   return integer
+
 def ShopScreen():
+   global Credits
+   global Name
    os.system("cls")
-   print("ShopScreen")
+   print("Welcome to ye olde Shoppe " + Name)
+   time.sleep(0.5)
+   print("You have " + str(Credits) + " credits")
+   print("")
+   ShopMenu = Menu([
+      "a - add credits to your account",
+      "q - quit to main menu"
+   ], [
+      "a",
+      "q"
+   ])
+   if ShopMenu == "a":
+      AddCredits = GetNumberFromUser("How many credits do you want to add?: ", "It's a number not rocket science")
+      Credits = Credits + AddCredits
+      print("Added " + str(AddCredits) + " to your account")
+      time.sleep(1)
+      ShopScreen()
+   if ShopMenu == "q":
+      MainMenuScreen()
 
 def RandomPictureScreen():
    os.system("cls")
@@ -51,7 +104,92 @@ def LyricsScreen():
 
 def MeetSantaScreen():
    os.system("cls")
-   print("MeetSantaScreen")
+   PrintPicture('''
+                              ..,,,,,,,,,,,,,,,,.. 
+                        ..,,;;;;;;;;;;;;;;;;;;;;;;;;;;,,. 
+                    .,::::;;;;aaaaaaaaaaaaaaaaaaaaaaaaaaa;;,,. 
+                .,;;,:::a@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@a, 
+              ,;;;;.,a@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@a 
+           ,;;;;%;.,@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@a, 
+        ,;%;;;;%%;,@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ 
+     ,;;%%;;;;;%%;;@@@@@@@@@@@@@@'%v%v%v%v%v%v%v%v%v%v%v%v`@@@@@@@@@ 
+   ,;;%%;;;;:;;;%;;@@@@@@@@@'%vvvvvvvvvnnnnnnnnnnnnnnnnvvvvvv%`@@@@' 
+  ,;%%;;;;;:;;;;;;;;@@@@@'%vvva@@@@@@@@avvnnnnnnnnnnvva@@@@@@@OOov, 
+ ,;%;;;;;;:::;;;;;;;@@'OO%vva@@@@@@@@@@@@vvnnnnnnnnvv@@@@@@@@@@@Oov 
+ ;%;;;;;;;:::;;;;;;;;'oO%vvn@@%nvvvvvvvv%nnnnnnnnnnnnn%vvvvvvnn%@Ov 
+ ;;;;;;;;;:::;;;;;;::;oO%vvnnnn>>nn.   `nnnnnnnnnnnn>>nn.   `nnnvv' 
+ ;;;;;;;;;:::;;;;;;::;oO%vvnnvvmmmmmmmmmmvvvnnnnnn;%mmmmmmmmmmmmvv, 
+ ;;;;;;;;;:::;;;;;;::;oO%vvmmmmmmmmmmmmmmmmmvvnnnv;%mmmmmmmmmmmmmmmv, 
+ ;;;;;;;;;;:;;;;;;::;;oO%vmmmmnnnnnnnnnnnnmmvvnnnvmm;%vvnnnnnnnnnmmmv 
+  `;%;;;;;;;:;;;;::;;o@@%vvmmnnnnnnnnnnnvnnnnnnnnnnmmm;%vvvnnnnnnmmmv 
+   `;;%%;;;;;:;;;::;.oO@@%vmmnnnnnnnnnvv%;nnnnnnnnnmmm;%vvvnnnnnnmmv' 
+     `;;;%%;;;:;;;::;.o@@%vvnnnnnnnnnnnvv%;nnnnnnnmm;%vvvnnnnnnnv%'@a. 
+      a`;;;%%;;:;;;::;.o@@%vvvvvvvvvvvvvaa@@@@@@@@@@@@aa%%vvvvv%%@@@@o. 
+     .@@o`;;;%;;;;;;::;,o@@@%vvvvvvva@@@@@@@@@@@@@@@@@@@@@avvvva@@@@@%O, 
+    .@@@@@Oo`;;;;;;;;::;o@@@@@@@@@@@@@@@@@@@@"""""""@@@@@@@@@@@@@@@@@OO@a 
+  .@@@@@@@@@OOo`;;;;;;:;o@@@@@@@@@@@@@@@@"           "@@@@@@@@@@@@@@oOO@@@, 
+ .@@@@o@@@@@@@OOo`;;;;:;o,@@@@@@@@@@%vvvvvvvvvvvvvvvvvv%%@@@@@@@@@oOOO@@@@@, 
+ @@@@o@@@@@@@@@OOo;::;'oOOooooooooOOOo%vvvvvvvvvvvvvv%oOOooooooooOOO@@@O@@@, 
+ @@@oO@@@@@@@@@OOa@@@@@a,oOOOOOOOOOOOOOOoooooooooooooOOOOOOOOOOOOOO@@@@Oo@@@ 
+ @@@oO@@@@@@@OOa@@@@@@@@Oo,oO@@@@@@@@@@OOOOOOOOOOOOOO@@@@@@@@@@@@@@@@@@Oo@@@ 
+ @@@oO@@@@@@OO@@@@@@@@@@@OO,oO@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@Oo@@@ 
+ @@@@o@@@@@@OO@@@@@@@@@@OOO,oO@@@@@@@@@O@@@@@@@@@@@@@@@@@@@@@o@@@@@@@@@O@@@@ 
+ @@@@@o@@@@@OOo@@@@@@@OOOO'oOO@@@@@@@@Oo@@@@@@@@@@@@O@@@@@@@@Oo@@@@@@@@@@@@a 
+`@@@@@@@O@@@OOOo`OOOOOOO'oOO@@@@@@@@@O@@@@@@@@@@@@@@@O@@@@@@@@Oo@@@@@@@@@@@@ 
+ `@@@@@OO@@@@@OOOooooooooOO@@@@@@@@@@@@@@@@@@@@@@@@@@Oo@@@@@@@Oo@@@@@@oO@@@@ 
+   `@@@OO@@@@@@@@@@@@@@@@@@@O@@@@@@@@@@@@@@@@@@@@@@@@Oo@@@@@@@O@@@@@@@oO@@@' 
+      `@@`O@@@@@@@@@@@@@@@@@@@Oo@@@@@@@@@@@@@@@@@@@@@@Oo@@@@@@@@@@@@@@@O@@@' 
+        `@ @@@@@@@@@@@@@@@@@@@OOo@@@@@@@@@@@@@@@@@@@@@O@@@@@@@@@@@@@@@'@@' 
+           `@@@@@@@@@@@@@@@@@@OOo@@@@@@@@@@@@@@@@@@@@O@@@@@@@@@@@@@@@ a' 
+               `@@@@@@@@@@@@@@OOo@@@@@@@@@@@@@@@@@@@@@@@@Oo@@@@@@@@' 
+                  `@@@@@@@@@@@Oo@@@@@@@@@@@@@@@@@@@@@@@@@Oo@@@@' 
+                      `@@@@@@Oo@@@@O@@@@@@@@@@@@@@@@@@@'o@@' 
+                          `@@@@@@@@oO@@@@@@@@@@@@@@@@@ a' 
+                              `@@@@@oO@@@@@@@@@@@@@@' ' 
+                                '@@@o'`@@@@@@@@' 
+                                 @'   .@@@@' 
+                                     @@' 
+                                   @'
+''')
+   time.sleep(0.5)
+   CharacterTyping("I see you " + Name + "...")
+   print("")
+   print("Questions to ask him (enter corresponding number): ")
+   MeetSantaMenu()
+
+def MeetSantaMenu():
+   print("")
+   SantaMenu = Menu([
+      "1 - Why did you choose this job?", 
+      "2 - Do the reindeer smell really bad when you are on your sleigh?",
+      "3 - Is the beard real?",
+      "q - quit to main menu"
+   ], [
+      "1",
+      "2",
+      "3",
+      "q"
+   ])
+   if SantaMenu == "1":
+      os.system("cls")
+      print("Why did you choose this job?")
+      CharacterTyping("Mid life crisis -_-")
+      input("Press ENTER to ask another question or quit: ")
+      MeetSantaMenu()
+   if SantaMenu == "2":
+      os.system("cls")
+      print("Do the reindeer smell really bad when you are on your sleigh?")
+      CharacterTyping("My gas mask helps a lot with it, but yes")
+      input("Press ENTER to ask another question or quit: ")
+      MeetSantaMenu()
+   if SantaMenu == "3":
+      os.system("cls")
+      print("Is the beard real?")
+      CharacterTyping("very much so, and I know it's gorgeous no need to fuss")
+      input("Press ENTER to ask another question or quit: ")
+      MeetSantaMenu()
+   if SantaMenu == "q":
+      MainMenuScreen()
 
 def WelcomeScreen():
    os.system("cls")
@@ -60,6 +198,14 @@ def WelcomeScreen():
    Name = input("Give name: ")
    if Name.upper() == "REUBEN":
       print("Welkomm master")
+
+def CharacterTyping(message):
+   typing_speed = 50
+   for l in message:
+      sys.stdout.write(l)
+      sys.stdout.flush()
+      time.sleep(random.random()*10.0/typing_speed)
+   print("")
 
 def PrintPicture(picture):
    lines = picture.splitlines()
