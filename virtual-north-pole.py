@@ -3,6 +3,7 @@ import os
 import sys
 import random
 
+Basket = []
 Name = ""
 Credits = 0
 
@@ -76,9 +77,13 @@ def ShopScreen():
    print("")
    ShopMenu = Menu([
       "a - add credits to your account",
+      "b - browse ye olde shoppe",
+      "c - checkout",
       "q - quit to main menu"
    ], [
       "a",
+      "b",
+      "c",
       "q"
    ])
    if ShopMenu == "a":
@@ -89,10 +94,99 @@ def ShopScreen():
       ShopScreen()
    if ShopMenu == "q":
       MainMenuScreen()
+   if ShopMenu == "b":
+      BrowseShopScreen()
+   if ShopMenu == "c":
+      CheckoutScreen()
 
 def RandomPictureScreen():
    os.system("cls")
    print("RandomPictureScreen")
+
+def CheckoutScreen():
+   global Credits
+   global Basket
+   os.system("cls")
+   print("In your basket there is: ")
+   print("")
+   for item in Basket:
+      print("- " + item)
+   print("")
+   ShopMenu = Menu([
+      "b - buy now",
+      "t - buy more things",
+      "q - quit to shop"
+   ], [
+      "b",
+      "t",
+      "q"
+   ])
+   if ShopMenu == "b":
+      print("sorting out now calm down")
+      Basket = []
+      time.sleep(3)
+      print("sent :)")
+      time.sleep(1)
+      MainMenuScreen()
+   if ShopMenu == "t":
+      print("okey dokey")
+      time.sleep(1)
+      BrowseShopScreen()
+   if ShopMenu == "q":
+      ShopScreen()
+
+def BrowseShopScreen():
+   os.system("cls")
+   global Credits
+   global Basket
+   print("Welkomm to ye olde shoppe shop")
+   print("You have " + str(Credits) + " to spend")
+   ShopOptions = Menu([
+      "1 - Santa (500 credits)",
+      "2 - reindeer (50 credits)",
+      "3 - The north pole (500000 credits)",
+      "4 - santa klaus suit - (5 credits)",
+      "5 - elf (500 credits)",
+      "q - quit to main shop menu (or checkout)"
+   ], [
+      "1",
+      "2",
+      "3",
+      "4",
+      "5",
+      "q"
+   ])
+   if ShopOptions == "1":
+      AddToBasket(500, "SANTA")
+      time.sleep(1)
+      BrowseShopScreen()
+   if ShopOptions == "2":
+      AddToBasket(50, "REINDEER")
+      time.sleep(1)
+      BrowseShopScreen()
+   if ShopOptions == "3":
+      AddToBasket(500000, "NORTH POLE")
+      time.sleep(1)
+      BrowseShopScreen()
+   if ShopOptions == "4":
+      AddToBasket(5, "SUIT")
+      time.sleep(1)
+      BrowseShopScreen()
+   if ShopOptions == "5":
+      AddToBasket(500, "ELF")
+      time.sleep(1)
+      BrowseShopScreen()
+   if ShopOptions == "q":
+      ShopScreen()
+
+def AddToBasket(cost, title):
+   global Credits
+   if Credits < cost:
+      print("Not enough moneys to buy this thing or person it depends")
+   else:
+      Credits = Credits - cost
+      Basket.append(title)
+      print("added " + title + " to your basket")
 
 def CreditsScreen():
    os.system("cls")
@@ -214,6 +308,7 @@ def PrintPicture(picture):
       time.sleep(0.05)
 
 def GoodOrBadScreen():
+   global Credits
    os.system("cls")
    global Name
    print("Hello " + Name + ", we are checking if you've been bad or nasty")
@@ -221,7 +316,10 @@ def GoodOrBadScreen():
    print("boop beep bop...")
    time.sleep(1)
    if Name.upper() == "REUBEN":
-      print("no comment.")
+      print("hacks lol")
+      time.sleep(0.5)
+      print("*added 10000000000 credits*")
+      Credits = Credits + 10000000000
    else:
       print("Uh oh, you've been bad this decade hahahahahhahhahahadahdahhfwrehbgiurefaya")
    input("press ENTER to go back to main menyu: ")
