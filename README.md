@@ -12,7 +12,6 @@ Animated christmas thing (bells, etc)
 * Christmas shop
 * * add credits, displays items for sale, see your basket 
 * find out if you're bad or good (definitely biased)
-* random christmas ascii picture
 * credits
 * quit 
 

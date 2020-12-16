@@ -9,20 +9,27 @@ Credits = 0
 
 def Menu(options, acceptableMenuChoices):
    theChoice = ""
+   for option in options:
+      print(option)
+      print("")
    while(theChoice not in acceptableMenuChoices):
-      for option in options:
-         print(option)
-         print("")
       theChoice = input("Choose ur thing idk: ").lower()
    return theChoice
 
 def MainMenuScreen():
    os.system("cls")
    print("")
+   print('''
+███    ███ ███████ ███    ██ ██    ██ 
+████  ████ ██      ████   ██ ██    ██ 
+██ ████ ██ █████   ██ ██  ██ ██    ██ 
+██  ██  ██ ██      ██  ██ ██ ██    ██ 
+██      ██ ███████ ██   ████  ██████  
+                                      
+   ''')
    menu = Menu([
          "b - Have you been good or bad haha?", 
          "s - shop", 
-         "r - random christmas picture", 
          "c - credits", 
          "l - christmas song lyrics", 
          "m - meet santa", 
@@ -30,7 +37,6 @@ def MainMenuScreen():
       ], [
          "b", 
          "s", 
-         "r", 
          "c", 
          "l", 
          "m",
@@ -42,8 +48,6 @@ def MainMenuScreen():
       GoodByeScreen()
    if menu == "s":
       ShopScreen()
-   if menu == "r":
-      RandomPictureScreen()
    if menu == "c":
       CreditsScreen()
    if menu == "l":
@@ -51,9 +55,24 @@ def MainMenuScreen():
    if menu == "m":
       MeetSantaScreen()
 
+def GenerateSnowLine():
+   SnowLine = []
+   Snow = []
+   for i in range(0, 3):
+      Snow.append(random.randint(0, 70))
+   for i in range(0, 70):
+      if i in Snow: 
+         SnowLine.append("❆")
+      else:
+         SnowLine.append(" ")
+   print("".join(SnowLine))
+
 def LoadingScreen():
    os.system("cls")
    print("Loading...")
+   for i in range(0, 15):
+      time.sleep(0.2)
+      GenerateSnowLine()
    time.sleep(1)
 
 def GetNumberFromUser(message, errormessage):
@@ -71,6 +90,13 @@ def ShopScreen():
    global Credits
    global Name
    os.system("cls")
+   print('''
+███████ ██   ██  ██████  ██████  
+██      ██   ██ ██    ██ ██   ██ 
+███████ ███████ ██    ██ ██████  
+     ██ ██   ██ ██    ██ ██      
+███████ ██   ██  ██████  ██      
+   ''')
    print("Welcome to ye olde Shoppe " + Name)
    time.sleep(0.5)
    print("You have " + str(Credits) + " credits")
@@ -98,10 +124,6 @@ def ShopScreen():
       BrowseShopScreen()
    if ShopMenu == "c":
       CheckoutScreen()
-
-def RandomPictureScreen():
-   os.system("cls")
-   print("RandomPictureScreen")
 
 def CheckoutScreen():
    global Credits
@@ -190,11 +212,125 @@ def AddToBasket(cost, title):
 
 def CreditsScreen():
    os.system("cls")
-   print("CreditsScreen")
+   print("******************************************")
+   CharacterTyping("It was me all along mwahahahahahaha")
+   print("******************************************")
+   time.sleep(1)
+   print("jk jk lol")
+   time.sleep(1)
+   print("")
+   print("******************************************")
+   print("")
+   CharacterTyping("code - by me")
+   print("")
+   time.sleep(1)
+   CharacterTyping("ascii pictures - mr google")
+   print("")
+   time.sleep(1)
+   CharacterTyping("awful jokes - dad")
+   print("")
+   print("******************************************")
+   time.sleep(2)
+   MainMenuScreen()
 
 def LyricsScreen():
    os.system("cls")
-   print("LyricsScreen")
+   print("Choose your Christmas song lyrics yay: ")
+   print("")
+   ChooseSong = Menu([
+      "1 - Deck The Halls",
+      "2 - Jingle Bells",
+      "3 - Joy to the World",
+      "q - quit to main menu"
+   ], [
+      "1",
+      "2",
+      "3",
+      "q"
+   ])
+   if ChooseSong == "1":
+      os.system("cls")
+      CharacterTyping('''
+Deck the halls with boughs of holly, Fa la la la la la la la!
+
+'Tis the season to be jolly, Fa la la la la la la la!
+Don we now our gay apparel, Fa la la la la la la la!
+Troll the ancient Yuletide carol, Fa la la la la la la la!
+
+See the blazing yule before us, Fa la la la la la la la!
+Strike the harp and join the chorus, Fa la la la la la la la!
+
+Follow me in merry measure, Fa la la la la la la la!
+While I tell of Yuletide treasure, Fa la la la la la la la!
+
+Fast away the old year passes, Fa la la la la la la la!
+Hail the new, ye lads and lasses, Fa la la la la la la la!
+Sing we joyous all together! Fa la la la la la la la!
+Heedless of the wind and weather, Fa la la la la la la la!
+      ''', 300)
+      input("Press ENTER to choose another song or quit: ")
+      LyricsScreen()
+
+   if ChooseSong == "2":
+      os.system("cls")
+      CharacterTyping('''
+Dashing through the snow
+On a one horse open sleigh
+O'er the fields we go,
+Laughing all the way
+Bells on bob tail ring,
+making spirits bright
+What fun it is to laugh and sing
+A sleighing song tonight
+
+Oh, jingle bells, jingle bells
+Jingle all the way
+Oh, what fun it is to ride
+In a one horse open sleigh
+Jingle bells, jingle bells
+Jingle all the way
+Oh, what fun it is to ride
+In a one horse open sleigh
+      ''', 300)
+      input("Press ENTER to choose another song or quit: ")
+      LyricsScreen()
+
+   if ChooseSong == "3":
+      os.system("cls")
+      CharacterTyping('''
+Joy to The world! the Lord is come
+Let earth receive her King
+Let ev'ry heart prepare him room
+And heaven and nature sing
+And heaven and nature sing
+And heaven and nature sing
+
+Joy to the world! the Savior reigns
+Let men their songs employ
+While fields and floods, rocks, hills and plains
+Repeat the sounding joy
+Repeat the sounding joy
+Repeat the sounding joy
+
+No more let sins and sorrows grow,
+Nor thorns infest the ground;
+He comes to make His blessings flow
+Far as the curse is found,
+Far as the curse is found,
+Far as, far as, the curse is found.
+
+He rules the world with truth and grace
+And makes the nations prove
+The glories of His righteousness
+And wonders of His love
+And wonders of His love
+And wonder wonders of His love
+      ''', 300)
+      input("Press ENTER to choose another song or quit: ")
+      LyricsScreen()
+
+   if ChooseSong == "q":
+      MainMenuScreen()
 
 def MeetSantaScreen():
    os.system("cls")
@@ -246,7 +382,7 @@ def MeetSantaScreen():
                                    @'
 ''')
    time.sleep(0.5)
-   CharacterTyping("I see you " + Name + "...")
+   CharacterTyping("I see you " + Name + "...", 30)
    print("")
    print("Questions to ask him (enter corresponding number): ")
    MeetSantaMenu()
@@ -267,19 +403,19 @@ def MeetSantaMenu():
    if SantaMenu == "1":
       os.system("cls")
       print("Why did you choose this job?")
-      CharacterTyping("Mid life crisis -_-")
+      CharacterTyping("Mid life crisis -_-", 40)
       input("Press ENTER to ask another question or quit: ")
       MeetSantaMenu()
    if SantaMenu == "2":
       os.system("cls")
       print("Do the reindeer smell really bad when you are on your sleigh?")
-      CharacterTyping("My gas mask helps a lot with it, but yes")
+      CharacterTyping("My gas mask helps a lot with it, but yes", 40)
       input("Press ENTER to ask another question or quit: ")
       MeetSantaMenu()
    if SantaMenu == "3":
       os.system("cls")
       print("Is the beard real?")
-      CharacterTyping("very much so, and I know it's gorgeous no need to fuss")
+      CharacterTyping("very much so, and I know it's gorgeous no need to fuss", 40)
       input("Press ENTER to ask another question or quit: ")
       MeetSantaMenu()
    if SantaMenu == "q":
@@ -288,24 +424,47 @@ def MeetSantaMenu():
 def WelcomeScreen():
    os.system("cls")
    global Name
-   print("Welcome to Santa")
+   print('''
+███    ██  ██████  ██████  ████████ ██   ██     ██████   ██████  ██      ███████ 
+████   ██ ██    ██ ██   ██    ██    ██   ██     ██   ██ ██    ██ ██      ██      
+██ ██  ██ ██    ██ ██████     ██    ███████     ██████  ██    ██ ██      █████   
+██  ██ ██ ██    ██ ██   ██    ██    ██   ██     ██      ██    ██ ██      ██      
+██   ████  ██████  ██   ██    ██    ██   ██     ██       ██████  ███████ ███████ 
+   ''')
+   PrintPicture('''
+             .     .  .      +     .      .          .
+     .       .      .     #       .           .
+        .      .         ###            .      .      .
+      .      .   "#:. .:##"##:. .:#"  .      .
+          .      . "####"###"####"  .
+       .     "#:.    .:#"###"#:.    .:#"  .        .       .
+  .             "#########"#########"        .        .
+        .    "#:.  "####"###"####"  .:#"   .       .
+     .     .  "#######""##"##""#######"                  .
+                ."##"#####"#####"##"           .      .
+    .   "#:. ...  .:##"###"###"##:.  ... .:#"     .
+      .     "#######"##"#####"##"#######"      .     .
+    .    .     "#####""#######""#####"    .      .
+            .     "      000      "    .     .
+       .         .   .   000     .        .       .
+.. .. ..................O000O........................ ...... ...
+   ''')
    Name = input("Give name: ")
    if Name.upper() == "REUBEN":
       print("Welkomm master")
 
-def CharacterTyping(message):
-   typing_speed = 50
+def CharacterTyping(message, speed = 50):
    for l in message:
       sys.stdout.write(l)
       sys.stdout.flush()
-      time.sleep(random.random()*10.0/typing_speed)
+      time.sleep(random.random()*10.0/speed)
    print("")
 
-def PrintPicture(picture):
+def PrintPicture(picture, speed = 0.05):
    lines = picture.splitlines()
    for line in lines:
       print(line)
-      time.sleep(0.05)
+      time.sleep(speed)
 
 def GoodOrBadScreen():
    global Credits
